@@ -5,7 +5,7 @@ import googleapiclient
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 flow = InstalledAppFlow.from_client_secrets_file(
-    'C:\\nix\\Python\\Rob_Scripts\\Calendar Accept Script\\client_secret.json', SCOPES)
+    'filepath\client_secret.json', SCOPES)
 credentials = flow.run_local_server(port=0)
 
 service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
