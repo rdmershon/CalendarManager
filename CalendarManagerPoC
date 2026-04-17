@@ -1,0 +1,22 @@
+from google_auth_oauthlib.flow import InstalledAppFlow
+import googleapiclient
+
+# Define the scopes
+SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+
+flow = InstalledAppFlow.from_client_secrets_file(
+    'C:\\nix\\Python\\Rob_Scripts\\Calendar Accept Script\\client_secret.json', SCOPES)
+credentials = flow.run_local_server(port=0)
+
+service = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
+
+# Call the Calendar API
+calendars_result = service.calendarList().list().execute()
+calendars = calendars_result.get('items', [])
+
+if not calendars:
+    print('No calendars found.')
+else:
+    print('Calendars:')
+    for calendar in calendars:
+        print(calendar['summary'])
